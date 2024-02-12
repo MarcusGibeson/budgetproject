@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Bill {
@@ -16,15 +17,21 @@ public class Bill {
     private int amount;
     private LocalDate dueDate;
 
+    @ManyToOne
+    private User user;
+
     public Bill () {
 
     }
 
-    public Bill(String name, int amount, LocalDate dueDate) {
+    public Bill(String name, int amount, LocalDate dueDate, User user) {
         this.name = name;
         this.amount = amount;
         this.dueDate = dueDate;
+        this.user = user;
     }
+
+
 
     public String getName() {
         return name;
@@ -48,6 +55,14 @@ public class Bill {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -86,8 +101,9 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill [name=" + name + ", amount=" + amount + ", dueDate=" + dueDate + "]";
+        return "Bill [name=" + name + ", amount=" + amount + ", dueDate=" + dueDate + ", user=" + user + "]";
     }
+
 
     
 }
