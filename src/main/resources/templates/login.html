@@ -1,1 +1,27 @@
-!
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <script type="text/javascript" th:src="@{/static/login.js}"></script>
+
+    <title>Login</title>
+</head>
+<body>
+    <h1> Budget Login </h1>
+    <section class="main">
+        <div class="login-container" id="sign-in container">
+            <form th:action="@{/loginUser}" th:object="${user}" method="POST">
+                <h2> Sign in </h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Sign in</button>
+            </form>
+        </div>
+        
+    </section>
+</body>
+</html>

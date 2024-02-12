@@ -1,10 +1,11 @@
-package budgetproject.budgetproject.Controller;
+package budgetproject.budgetproject.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import budgetproject.budgetproject.Models.LoginDto;
 import budgetproject.budgetproject.Models.User;
@@ -36,11 +37,11 @@ public class MainController {
 
     @GetMapping({"","/","/login"})
     public String loginPage(Model model) {
-        model.addAttribute("loginDTO", new LoginDto());
-        return "login";
+        model.addAttribute("loginDto", new LoginDto());
+        return "login"; 
     }
 
-    /*
+    /*  
      * Login control and cookie creation
      */
 
@@ -68,7 +69,7 @@ public class MainController {
         User user = userService.getUserById(userId);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("user", user);
-        return "home";
+        return "budget";
     }
 
     /*
