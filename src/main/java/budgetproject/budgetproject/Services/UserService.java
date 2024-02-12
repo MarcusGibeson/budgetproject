@@ -31,6 +31,7 @@ public class UserService {
     }
 
     //user registration
+    @SuppressWarnings("null")
     public void registerUser(User user) {
         userRepository.save(user);
     }
@@ -44,6 +45,7 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    @SuppressWarnings("null")
     public User save(User user) {
         return userRepository.save(user);
     }

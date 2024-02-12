@@ -19,6 +19,7 @@ public class BillService {
         this.billRepository = billRepository;
     }
 
+    @SuppressWarnings("null")
     public Bill save (Bill bill) {
         return billRepository.save(bill);
     }
@@ -27,6 +28,7 @@ public class BillService {
         return billRepository.findAll();
     }
 
+    @SuppressWarnings("null")
     public Bill retrieveBillById(Long id) throws Exception{
         try {
             return billRepository.findById(id).get();
@@ -44,6 +46,7 @@ public class BillService {
         }
     }
 
+    @SuppressWarnings("null")
     public void deleteBill(Long billId) {
         Optional<Bill> billOptional = billRepository.findById(billId);
         if (billOptional.isPresent()) {

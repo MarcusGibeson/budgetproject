@@ -14,10 +14,12 @@ public class IncomeService {
         this.incomeRepository = incomeRepository;
     }
 
+    @SuppressWarnings("null")
     public Income save(Income income){
         return incomeRepository.save(income);
     }
 
+    @SuppressWarnings("null")
     public Income retrieveIncomeById(Long id) throws Exception {
         try{
             return incomeRepository.findById(id).get();
@@ -26,6 +28,7 @@ public class IncomeService {
         }
     }
 
+    @SuppressWarnings("null")
     public void delete(Long id) throws Exception {
         if(!incomeRepository.existsById(id)) {
             throw new Exception("Income not found");
