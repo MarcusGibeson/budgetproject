@@ -11,28 +11,30 @@
 <body>
     <div class="container">
         <div id="box">
-            <h1 class="table-header"> List of bills:</h1>
+            <h1 class="table-header"> List of Income:</h1>
             <div class="table-container">
                 <table>
                     <thead>
                         <tr>
-                            <th> Bill name</th>
-                            <th> Bill amount</th>
-                            <th> Bill due date</th>
+                            <th> Income name</th>
+                            <th> Income amount</th>
+                            <th> Income date paid</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="bill : ${user.bills}">
-                            <td th:text="${bill.name}"></td>
-                            <td th:text="${bill.amount}"></td>
-                            <td th:text="${bill.dueDate}"></td>
+                        <tr th:each="income : ${user.incomes}">
+                            <td th:text="${income.name}"></td>
+                            <td th:text="${income.amount}"></td>
+                            <td th:text="${income.datePaid}"></td>
                         </tr>
                     </tbody>
                 </table>
+                <br />
+                <section>
+                    Total worth of all income: <span th:text="${user.getTotalIncomeAmount()}"></span>
+                </section>
             </div>
         </div>
     </div>
-
-    
 </body>
 </html>

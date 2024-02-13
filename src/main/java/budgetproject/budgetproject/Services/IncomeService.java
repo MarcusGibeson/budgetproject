@@ -2,6 +2,7 @@ package budgetproject.budgetproject.Services;
 
 import org.springframework.stereotype.Service;
 
+import budgetproject.budgetproject.Models.Bill;
 import budgetproject.budgetproject.Models.Income;
 import budgetproject.budgetproject.Repositories.IncomeRepository;
 
@@ -28,6 +29,9 @@ public class IncomeService {
         }
     }
 
+    public Iterable<Income> retrieveAllIncome() {
+        return incomeRepository.findAll();
+    } 
     @SuppressWarnings("null")
     public void delete(Long id) throws Exception {
         if(!incomeRepository.existsById(id)) {

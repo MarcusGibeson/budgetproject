@@ -24,7 +24,7 @@ public class LoginDto {
     public String getPassword() {
         return password;
     }
-    public void setPasword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

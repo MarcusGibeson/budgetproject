@@ -70,6 +70,25 @@ public class User {
         this.incomes = incomes;
     }
 
+    public double getTotalBillsAmount() {
+        double totalAmount = 0.0;
+        if (bills != null) {
+            for (Bill bill : bills) {
+                totalAmount += bill.getAmount();
+            }
+        }
+        return totalAmount;
+    }
+
+    public double getTotalIncomeAmount() {
+        double totalAmount = 0.0;
+        if (incomes != null) {
+            for (Income income : incomes) {
+                totalAmount += income.getAmount();
+            }
+        }
+        return totalAmount;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;

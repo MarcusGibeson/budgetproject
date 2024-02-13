@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import budgetproject.budgetproject.Models.Bill;
 import budgetproject.budgetproject.Models.LoginDto;
 import budgetproject.budgetproject.Models.User;
 import budgetproject.budgetproject.Services.BillService;
@@ -36,7 +38,7 @@ public class MainController {
     @GetMapping({"","/","/login"})
     public String loginPage(Model model) {
         model.addAttribute("loginDto", new LoginDto());
-        return "login.html"; 
+        return "login"; 
     }
 
     /*  
@@ -67,7 +69,7 @@ public class MainController {
         User user = userService.getUserById(userId);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("user", user);
-        return "budget";
+        return "homepage";
     }
 
     /*
@@ -85,5 +87,13 @@ public class MainController {
         return "login";
     }
 
+    @PostMapping("/create-bill")
+    public String createBill(@ModelAttribute Bill bill, Model model, HttpServletRequest request) throws Exception {
+        long userId = userService.getUserId(request);
+        User user = userService.getUserById(userId);
+        bill.setUser(user);
+        billService.save(bill);
+        return "redirect:/bills";
+    }
     
 }

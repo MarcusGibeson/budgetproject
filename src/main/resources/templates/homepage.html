@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/css/homepage.css}" />
+    <script type="text/javascript" th:src="@{/static/homepage.js}"></script>
+    <script>
+		function loadContent(fragmentName, memberId, taskId) {
+			var url = '/' + fragmentName;
+
+			if (memberId) {
+				url += '/' + memberId;
+			}
+			1
+			if (taskId) {
+				url += '/' + taskId;
+			}
+
+			fetch(url)
+				.then(function (response) {
+					return response.text();
+				})
+				.then(function (html) {
+					var contentContainer = document.getElementById('dynamic-content');
+					contentContainer.innerHTML = html;
+				})
+				.catch(function (error) {
+					console.log('Error:', error);
+				});
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var contentContainer = document.getElementById('dynamic-content');
+			var defaultContent = contentContainer.innerHTML;
+
+			function handleClickEvent(event) {
+				event.preventDefault();
+				var fragmentName = event.target.getAttribute('data-fragment');
+				loadContent(fragmentName);
+			}
+
+			document.getElementById('bills-link').addEventListener('click', handleClickEvent);
+			document.getElementById('income-link').addEventListener('click', handleClickEvent);
+		});
+	</script>
+
+</head>
+<body>
+    <!-- Sidebar -->
+    
+    <section id="sidebar">
+        <ul class="side-menu top">
+            <li class="active">
+                <span class="text"> Dashboard </span>
+            </li>
+            <li>
+                <a th:href="@{/bills}" id="bills-link" onclick="loadContent('bills');">
+                <span class="text"> Bills </span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/income}" id="income-link" onclick="loadContent('income');">
+                <span class="text"> Income </span>
+                </a>
+            </li>
+            <li>
+                <span class="text"> Calculator </span>
+            </li>
+            <li>
+                <span class="text"> Calender </span>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <span class="text"> Settings </span>
+            </li>
+            <li>
+                <span class="text"> Logout </span>
+            </li>
+        </ul>
+    </section>
+    <!-- Sidebar -->
+
+    <section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu'></i>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+		</nav>
+		<!-- NAVBAR -->
+
+
+    <!-- Content -->
+    <section id="main">
+        <div id="dynamic-content">
+            <main>
+                <div class="head-tite">
+                    <div class="left">
+                        <h1> Dashboard </h1>
+                        <ul class="breadcrumb">
+                            <li> 
+                                <span th:text ="${user.username}"> Name </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </main>
+        </div>
+    </section>
+    <section id="content">
+        Welcome to budget planner. Click on the left side to view bills, income, calculator, or the calender!
+    </section>
+
+
+
+
+
+
+
+</body>
+</html>

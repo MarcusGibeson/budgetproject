@@ -16,7 +16,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
     //fetch userId 
     public long getUserId(HttpServletRequest request) {
         long retValue = 0;
