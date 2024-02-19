@@ -59,4 +59,12 @@ public class NavBarController {
         model.addAttribute("incomes", userIncomes);
         return "income";
     }
+
+    @GetMapping("/calculator")
+    public String showCalculator(Model model, HttpServletRequest request) throws Exception {
+        User user = mainController.getUserFromRequest(request);
+
+        model.addAttribute("user", user);
+        return "calculator";
+    }
 }

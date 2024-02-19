@@ -36,6 +36,7 @@
 
 			document.getElementById('bills-link').addEventListener('click', handleClickEvent);
 			document.getElementById('income-link').addEventListener('click', handleClickEvent);
+            document.getElementById('calc-link').addEventListener('click', handleClickEvent);
             
 		});
 	</script>
@@ -60,7 +61,9 @@
                 </a>
             </li>
             <li>
+                <a th:href="@{/calculator}" id="calc-link" onclick="loadContent('calculator');">
                 <span class="text"> Calculator </span>
+                </a>
             </li>
             <li>
                 <span class="text"> Calender </span>

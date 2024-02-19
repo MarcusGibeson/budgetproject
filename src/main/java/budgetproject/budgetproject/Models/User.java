@@ -89,6 +89,14 @@ public class User {
         }
         return totalAmount;
     }
+
+    public double getDifferenceBetweenIncomeAndBills() {
+        double totalBillAmount = getTotalBillsAmount();
+        double totalIncomeAmount = getTotalIncomeAmount();
+        double totalAmount = totalIncomeAmount - totalBillAmount; 
+        return totalAmount;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
