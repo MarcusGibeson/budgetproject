@@ -33,6 +33,19 @@
                 <section>
                     Total worth of all income: <span th:text="${user.getTotalIncomeAmount()}"></span>
                 </section>
+                <br />
+                <form id="incomeForm" th:action="@{/create-income}" th:object="${income}" method="POST">
+                    <label for="name">Income Name:</label>
+                    <input type="text" id="name" name="name" th:field="*{name}" required>
+                    <br>
+                    <label for="amount">Bill Amount</label>
+                    <input type="number" id="amount" name="amount" th:field="*{amount}" required>
+                    <br>
+                    <label for="dueDate">Bill Due Date:</label>
+                    <input type="date" id="datePaid" name="datePaid" th:field="*{datePaid}" required>
+                    <br>
+                    <button type="submit">Create income</button>
+                </form>
             </div>
         </div>
     </div>

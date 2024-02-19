@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import budgetproject.budgetproject.Models.Bill;
+import budgetproject.budgetproject.Models.Income;
 import budgetproject.budgetproject.Models.LoginDto;
 import budgetproject.budgetproject.Models.User;
 import budgetproject.budgetproject.Services.BillService;
@@ -33,6 +34,15 @@ public class MainController {
         this.billService = billService;
         this.userService = userService;
         this.incomeService = incomeService;
+    }
+
+    public User getUserFromRequest(HttpServletRequest request) throws Exception {
+        long userId = userService.getUserId(request);
+        if(userId == 0) {
+            throw new Exception("Not logged in");
+        }
+        return userService.getUserById(userId);
+        
     }
 
     @GetMapping({"","/","/login"})
@@ -62,13 +72,9 @@ public class MainController {
     
     @GetMapping("/logon")
     public String homepage(Model model, HttpServletRequest request) throws Exception {
-        long userId = userService.getUserId(request);
-        if(userId == 0) {
-            throw new Exception("Not logged in");
-        }
-        User user = userService.getUserById(userId);
-        model.addAttribute("username", user.getUsername());
+        User user = getUserFromRequest(request);
         model.addAttribute("user", user);
+        model.addAttribute("username", user.getUsername());
         return "homepage";
     }
 
@@ -89,11 +95,17 @@ public class MainController {
 
     @PostMapping("/create-bill")
     public String createBill(@ModelAttribute Bill bill, Model model, HttpServletRequest request) throws Exception {
-        long userId = userService.getUserId(request);
-        User user = userService.getUserById(userId);
+        User user = getUserFromRequest(request);
         bill.setUser(user);
         billService.save(bill);
-        return "redirect:/bills";
+        return "redirect:/logon";
     }
     
+    @PostMapping("/create-income")
+    public String createIncome(@ModelAttribute Income income, Model model, HttpServletRequest request) throws Exception {
+        User user = getUserFromRequest(request);
+        income.setUser(user);
+        incomeService.save(income);
+        return "redirect:/logon";
+    }
 }

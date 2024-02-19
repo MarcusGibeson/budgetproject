@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import budgetproject.budgetproject.Models.Bill;
+import budgetproject.budgetproject.Models.Income;
 import budgetproject.budgetproject.Models.User;
 import budgetproject.budgetproject.Services.BillService;
 import budgetproject.budgetproject.Services.IncomeService;
@@ -28,31 +29,34 @@ public class NavBarController {
     @Resource 
     private IncomeService incomeService;
 
-    public NavBarController(UserService userService, BillService billService, IncomeService incomeService) {
+    private final MainController mainController;
+
+    public NavBarController(UserService userService, BillService billService, IncomeService incomeService, MainController mainController) {
         this.userService = userService;
         this.billService = billService;
         this.incomeService = incomeService;
+        this.mainController = mainController;
     }
     
     @GetMapping("/bills")
     public String showBills(Model model, HttpServletRequest request) throws Exception {
-        long userId = userService.getUserId(request);
-        User user = userService.getUserById(userId);
-
+        User user = mainController.getUserFromRequest(request);
         Collection<Bill> userBills = user.getBills();
         
         model.addAttribute("user", user);
+        model.addAttribute("bill", new Bill());
         model.addAttribute("bills", userBills);
         return "bills";
     }
 
     @GetMapping("/income")
     public String showIncome(Model model, HttpServletRequest request) throws Exception {
-        long userId = userService.getUserId(request);
-        User user = userService.getUserById(userId);
+        User user = mainController.getUserFromRequest(request);
+        Collection<Income> userIncomes = user.getIncomes();
 
         model.addAttribute("user", user);
-        model.addAttribute("incomes", incomeService.retrieveAllIncome());
+        model.addAttribute("income", new Income());
+        model.addAttribute("incomes", userIncomes);
         return "income";
     }
 }

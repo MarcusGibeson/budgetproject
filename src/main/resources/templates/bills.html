@@ -34,15 +34,15 @@
                     Total cost of all bills: <span th:text="${user.getTotalBillsAmount()}"></span>
                 </section>
                 <br />
-                <form id="createBill">
-                    <label for="billName">Bill Name:</label>
-                    <input type="text" id="billName" name="billName" required>
+                <form id="billForm" th:action="@{/create-bill}" th:object="${bill}" method="POST">
+                    <label for="name">Bill Name:</label>
+                    <input type="text" id="name" name="name" th:field="*{name}" required>
                     <br>
-                    <label for="billAmount">Bill Amount</label>
-                    <input type="number" id="billAmount" name="billAmount" required>
+                    <label for="amount">Bill Amount</label>
+                    <input type="number" id="amount" name="amount" th:field="*{amount}" required>
                     <br>
-                    <label for="billDueDate">Bill Due Date:</label>
-                    <input type="date" id="billDueDate" name="billDueDate" required>
+                    <label for="dueDate">Bill Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" th:field="*{dueDate}" required>
                     <br>
                     <button type="submit">Create bill</button>
                 </form>
@@ -50,20 +50,5 @@
         </div>
     </div>
 
-    <!-- Doesn't work as intended-->
-    <script>
-        document.getElementById("billForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/create-bill", true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    location.reload();
-                }
-            };
-            xhr.send(formData);
-        });
-    </script>
 </body>
 </html>
