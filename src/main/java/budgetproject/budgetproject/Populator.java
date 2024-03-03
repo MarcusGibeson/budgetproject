@@ -35,6 +35,7 @@ public class Populator implements CommandLineRunner{
     //income
     LocalDate datePaidTaxes = LocalDate.of(2024, 2, 12);
     LocalDate datePaidPaycheck = LocalDate.of(2024, 2, 16);
+    LocalDate datePaidPaycheck2 = LocalDate.of(2024,3,1);
 
     @Override
     public void run(String... args) throws Exception {
@@ -70,9 +71,11 @@ public class Populator implements CommandLineRunner{
 
          Income taxes = new Income("Federal Taxes", 800 , dueDatePhone, admin);
          Income paycheck = new Income("Paycheck", 200, datePaidPaycheck, admin);
+         Income paycheck2 = new Income("Paycheck 2", 450, datePaidPaycheck2, admin);
 
          incomeService.save(taxes);
          incomeService.save(paycheck);
+         incomeService.save(paycheck2);
 
     }
 }
